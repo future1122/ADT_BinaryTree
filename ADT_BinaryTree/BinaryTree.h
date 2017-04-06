@@ -1,7 +1,9 @@
 #pragma once
 #include<iostream>
 using namespace std;
-template<class T>
+template <class T>
+class IInOrder;
+template <class T>
 struct BTNode {
 	BTNode() { lchild = nullptr; rchild = nullptr; }
 	BTNode(const T &x) {
@@ -21,6 +23,7 @@ struct BTNode {
 
 template <class T>
 class BinaryTree {
+	friend IInOrder<T>;
 public:
 	BinaryTree() {
 		root = nullptr;
@@ -42,7 +45,6 @@ private:
 	void PreOrder(void(*Visit)(T& x), BTNode<T> *t);
 	void InOrder(void(*Visit)(T& x),BTNode<T> *t);
 	void PostOrder(void(*Visit)(T& x),BTNode<T> *t);
-
 };
 
 template<class T>
@@ -121,7 +123,3 @@ inline void BinaryTree<T>::PostOrder(void(*Visit)(T &x), BTNode<T>* t)
 	}
 }
 
-template <class T>
-void Visit(T& x) {
-	cout << x << " ";
-}
